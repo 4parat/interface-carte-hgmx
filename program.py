@@ -1,7 +1,8 @@
 from paquet import *
+from interface import *
+import pygame
 
-paq = Paquet()
-paq2 = Paquet()
+paq1 = Paquet()
+paq2 = Paquet(vide = True)
 
-paq2.donner(paq, 50)
-print(paq)
+paq2.prendre(paq1, 56)

@@ -1,11 +1,12 @@
+from exceptions import *
 from carte import *
 from random import *
+
 
 class Paquet:
     def __init__(self, vide = False):
         self.cartes = []            # Liste stockant les cartes
-        self.nbCartes = 0           # Nombre de cartes dans le paquet (pour éviter de faire len(paquet.cartes) a chaque fois)
-        self.retourné = True
+        self.retourné = False
 
         if not vide:                # Permet d'initialiser un paquet avec toute les cartes               
             for i in ["pique", "coeur", "treifle", "carreau"]: 
@@ -13,7 +14,6 @@ class Paquet:
                     self.cartes.append(Carte(i, j+1))
             for i in range(2):
                 self.cartes.append(Carte(None, 0))
-            self.nbCartes = 54
 
     def __repr__(self):             # permet d'afficher l'ensemble des cartes du paquet dans la console en faisant print(paquet)
         repr = ""
@@ -37,26 +37,37 @@ class Paquet:
     def __getitem__(self, i):       # Permet d'accéder à une carte en ieme position en faisant paquet[i]
         return self.cartes[i]
 
+    def __add__(self, paq):
+        retour = paq
+        for i in paq:
+            self.cartes.append(i)
+        
+
+    def taille(self):
+        return self.cartes.__len__()
+
+    def inverser(self):
+        self.cartes = self.cartes[::-1]
+
     def retourner(self):
-        self.retourné = not self.retournée
+        self.retourné = not self.retourné
+        for i in self:
+            i.retourner()
+        self.inverser()
 
     def melanger(self):             # Permet de mélanger les cartes
         shuffle(self.cartes)
     
     def donner(self, paquet, nb):   # Permet de transférer nb cartes du paquet "self" vers un paquet "paquet"
-        k = -1 if self.retourné else 0
-        l = -1 if paquet.retourné else 0
         for i in range(nb):
-            paquet.cartes.insert(l, self[k])
-            paquet.nbCartes += 1
-            self.cartes.pop(k)
-            self.nbCartes -= 1
+            paquet.cartes.append(self[-1])
+            self.cartes.pop(-1)
 
     def prendre(self, paquet, nb):  # Permet de faire l'inverse de la fonction précédente
-        k = -1 if self.retourné else 0
-        l = -1 if paquet.retourné else 0
+        if nb > paquet.cartes.__len__():
+            raise pasAssezDeCarte()
         for i in range(nb):
-            self.cartes.insert(l, paquet[k])
-            self.nbCartes +=1
-            paquet.cartes.pop(k)
-            paquet.nbCartes -= 1
+            self.cartes.append(paquet[-1])
+            paquet.cartes.pop(-1)
+        
+    
