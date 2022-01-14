@@ -5,4 +5,7 @@ class Carte:
         self.x = 0                      # position en x
         self.y = 0                      # position en y
         self.sprite = ""                # définira ou se trouvera l'image de la carte
-        self.retourné = False
+        self.retourné = False           # Vrai si la carte est face caché
+    
+    def estFigure(self):
+        return self.valeur > 10
