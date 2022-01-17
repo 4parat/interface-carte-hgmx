@@ -6,8 +6,8 @@ class Carte:
         self.y = 0                      # position en y
         self.retourné = False           # Vrai si la carte est face caché
     
-    def estFigure(self):
+    def estFigure(self):                # retourne vrai si la carte est un valet, une dame, ou un roi
         return self.valeur > 10
     
-    def retourner(self):
+    def retourner(self):                # permet de retourner la carte (swap de True à False ou de False à True)
         self.retourné = not self.retourné

@@ -4,7 +4,7 @@ from random import *
 
 
 class Paquet:
-    def __init__(self, vide = False):
+    def __init__(self, vide = False, joker = False):
         self.cartes = []            # Liste stockant les cartes
         self.retourné = False
 
@@ -12,8 +12,9 @@ class Paquet:
             for i in ["pique", "coeur", "treifle", "carreau"]: 
                 for j in range(13):
                     self.cartes.append(Carte(i, j+1))
+        if joker:
             for i in range(2):
-                self.cartes.append(Carte(None, 0))
+                self.cartes.append(Carte(None, 0))      # J'avoue ne pas avoir trouver de sprite pour les jokers
 
     def __repr__(self):             # permet d'afficher l'ensemble des cartes du paquet dans la console en faisant print(paquet)
         repr = ""

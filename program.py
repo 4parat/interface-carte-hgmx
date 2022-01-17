@@ -1,8 +1,8 @@
+from plateau import *
 from paquet import *
 from interface import *
-import pygame
 
-paq1 = Paquet()
-paq2 = Paquet(vide = True)
+plat = Plateau()
 
-paq2.prendre(paq1, 56)
+paq = Paquet()
+plat.supprimer_paquet(paq)
