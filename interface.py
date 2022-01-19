@@ -5,12 +5,13 @@ class Interface:            # À compléter plus tard
     def __init__(self, largeur = 800, hauteur = 450):
         pygame.display.set_caption("Card Game")
         self.frame = pygame.display.set_mode((largeur, hauteur))
-        self.loop()
+        self.mon_groupe = pygame.sprite.Group()
 
 
     
     def loop(self):
         self.alive = True
+
         while self.alive:
             pygame.mouse.set_visible(False)
             fecran = pygame.image.load('images/table.jpg')                  # Fond d'ecran à modifier
@@ -37,6 +38,8 @@ class Interface:            # À compléter plus tard
             for e in pygame.event.get() :                                   # Boucle qui teste les évènements
                 if e.type == pygame.QUIT:
                     self.alive = False
+            
+            self.mon_groupe.draw(self.frame)
             pygame.display.flip()
 
 interface = Interface()
