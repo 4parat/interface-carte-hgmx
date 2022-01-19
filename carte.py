@@ -29,9 +29,9 @@ class Carte(pygame.sprite.Sprite):
         elif self.valeur == 11:
             val = "jack"
         elif self.valeur == 12:
-            val = "king"
-        elif self.valeur == 13:
             val = "queen"
+        elif self.valeur == 13:
+            val = "king"
         
         
         #print("images/cartes 2 (avec Jokers)/"+val+'_of_'+ens+".png")
@@ -63,9 +63,9 @@ class Carte(pygame.sprite.Sprite):
             elif self.valeur == 11:
                 val = "jack"
             elif self.valeur == 12:
-                val = "king"
-            elif self.valeur == 13:
                 val = "queen"
+            elif self.valeur == 13:
+                val = "king"
         
             self.images = pygame.image.load("images/cartes 2 (avec Jokers)/"+val+'_of_'+ens+".png")
         
