@@ -1,0 +1,20 @@
+Je mets les info afin d'eviter de spammer le groupe Insta de pavé de 40 lignes.
+
+
+A faire : Hesitez pas à rajouter des choses si vous avez des idées .
+
+Rajouter les sprites de la souris (G Lericheux) Fait √
+Regler le plein ecran (G Lericheux) Fait √
+Faire le Menu ()
+Ajouter une ambiance sonore ()
+Faire un onglet parametre qui contient : ()
+-Une moyen de mettre en plein ecran ()
+-Un moyen de bouger la sensibilité du curseur()
+.....
+
+-Faire le sprite du click droit (G Lericheux)
+
+
+
+
+
