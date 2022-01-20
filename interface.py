@@ -7,10 +7,16 @@ class Interface:            # À compléter plus tard
         pygame.display.set_caption("Card Game")
         self.fecran = pygame.image.load("images/table.jpg")
         self.fecran = pygame.transform.scale(self.fecran, (largeur, hauteur))
-        self.frame = pygame.display.set_mode((largeur, hauteur))
+        self.frame = pygame.display.set_mode((largeur, hauteur))        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
         self.mon_groupe = pygame.sprite.Group()
         self.souris = Souris()
 
+        self.plateau = Plateau()
+        paquet = Paquet(vide = True)
+        carte1 = Carte("pique", 1)
+        
+        self.plateau.ajouter_paquet(paquet)
+        self.plateau[0].cartes.append(carte1)
     
     def loop(self):
         self.alive = True
@@ -33,12 +39,17 @@ class Interface:            # À compléter plus tard
 
 
 
-            for e in pygame.event.get() :                                   # Boucle qui teste les évènements
-                if e.type == pygame.QUIT:
+            for event in pygame.event.get() :                                   # Boucle qui teste les évènements
+                
+                if event.type == pygame.QUIT:
                     self.alive = False
 
-            self.mon_groupe.draw(self.frame)
-            self.souris.update(self.frame)  # Affiche la Souris depuis souris.py
-            pygame.display.flip()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    for paq in self.plateau.paquets:
+                        for carte in paq:
+                            if pygame.Rect.colliderect(pygame.mouse.pos): #### Continuer
+                                carte.retourner()
 
-interface = Interface()
+            self.mon_groupe.draw(self.frame)
+            self.souris.update(self.frame)                                  # Affiche la Souris depuis souris.py
+            pygame.display.flip()

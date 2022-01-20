@@ -3,10 +3,8 @@ from paquet import *
 from interface import *
 from carte import *
 
-
-plat = Interface(1920, 1080)
+interface = Interface(1700, 900)
 
 carte1 = Carte("", 0)
-
-plat.mon_groupe.add(carte1)
-plat.loop()
+interface.mon_groupe.add(carte1)
+interface.loop()

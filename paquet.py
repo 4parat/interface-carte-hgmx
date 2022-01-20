@@ -47,11 +47,11 @@ class Paquet:
     def taille(self):
         return self.cartes.__len__()
 
-    def inverser(self):
-        self.cartes = self.cartes[::-1]
+    def inverser(self):                         # Permet de changer l'ORDRE des cartes (la première devient la dernière et vice versa sans changer en gardant le fait)
+        self.cartes = self.cartes[::-1]         # que les cartes soient retourné ou non
 
-    def retourner(self):
-        self.retourné = not self.retourné
+    def retourner(self):                        # Permet de retourner le paquet comme dans la réalité : la première devient la dernière et toute les cartes sont
+        self.retourné = not self.retourné       # retournés.
         for i in self:
             i.retourner()
         self.inverser()
