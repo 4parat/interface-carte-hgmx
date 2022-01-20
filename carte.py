@@ -15,7 +15,7 @@ class Carte(pygame.sprite.Sprite):
         val = ""
 
         if self.valeur == 0:
-            self.image = pygame.image.load("images/cartes 2 (avec Jokers)/black_joker.png")
+            self.image = pygame.image.load("images/cartes 2 (avec Jokers)/ace_of_hearts.png")
         else:
             if self.enseigne == "pique":
                 ens = "spades"

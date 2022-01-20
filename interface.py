@@ -23,7 +23,10 @@ class Interface:            # À compléter plus tard
             if pression[0] == True :
                 self.souris.click_G()
             elif pression[1] == True :                                      #A faire : Gerer le click droit
+                #self.souris.Click_D()
                 pass
+            elif pression[2] == True :
+                self.souris.click_M()
             else:
                 self.souris.reinitialiser()
 
@@ -33,9 +36,9 @@ class Interface:            # À compléter plus tard
             for e in pygame.event.get() :                                   # Boucle qui teste les évènements
                 if e.type == pygame.QUIT:
                     self.alive = False
-            
+
             self.mon_groupe.draw(self.frame)
-            self.souris.update(self.frame)                                  #Affiche la Souris depuis souris.py
+            self.souris.update(self.frame)  # Affiche la Souris depuis souris.py
             pygame.display.flip()
 
 interface = Interface()

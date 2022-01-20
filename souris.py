@@ -1,6 +1,5 @@
 import pygame
 pygame.init()
-from interface import*
 
 class Souris(pygame.sprite.Sprite):
 
@@ -11,6 +10,8 @@ class Souris(pygame.sprite.Sprite):
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.rect = self.curseur.get_rect()                                     #Creation de la hitbox
         self.enfoncer = False                                                   #IMPORTANT : A utilisé afin de deplacer les cartes ex : if souris.enfoncer == True : deplacer la carte
+        #self.tourner = False                                                   #IMPORTANT : A utilisé afin de retourner une carte .
+        self.demander = False                                                   #IMPORTANT : A utilisé afin d'afficher en grand la carte .
 
 
     def update(self,interface):
@@ -29,11 +30,32 @@ class Souris(pygame.sprite.Sprite):
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.enfoncer = True
 
+    def click_M(self):
+        self.curseur = pygame.image.load("images/Cotton_gloves_question_mark.png")
+        self.curseur = pygame.transform.scale(self.curseur,(50, 50))
+        self.curseur = pygame.transform.rotate(self.curseur, -90)
+        self.demander = True
+
+    #def Click_D(self):
+        #self.curseur = pygame.image.load("images/......")
+        #self.curseur = pygame.transform.scale(self.curseur,(...,...))
+        #self.curseur = pygame.transform.rotate(self.curseur, ....)
+        #self.tourner = True
+
+
+
+
     def reinitialiser(self):
         self.curseur = pygame.image.load("images/Cotton_gloves.png")
         self.curseur = pygame.transform.scale(self.curseur, (50, 50))
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.enfoncer = False                                            #Permet de reinitialiser le curseur
+        self.demander = False
+        #self.tourner = False
+
+
+
+
 
 
 
