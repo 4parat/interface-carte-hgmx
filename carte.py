@@ -11,7 +11,8 @@ class Carte(pygame.sprite.Sprite):
 
         self.updateSprite()         
 
-        self.rect = self.image.get_rect()       #self.image est crée dans updateSprite()
+        self.rect = self.image.get_rect()
+       #self.image est crée dans updateSprite()
 
 
     def updateSprite(self):                     # permet d'update le sprite
@@ -68,7 +69,13 @@ class Carte(pygame.sprite.Sprite):
         self.updateSprite()
         
     
-        
+    def teleporter(self, x, y):
+        self.rect.centerx = x
+        self.rect.centery = y
+    
+    def deplacer(self, x, y):
+        self.rect.centerx += x
+        self.rect.centery += y
 
 
     

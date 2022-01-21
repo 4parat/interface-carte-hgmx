@@ -9,21 +9,21 @@ class Interface:            # À compléter plus tard
         self.fecran = pygame.image.load("images/table.jpg")
         self.fecran = pygame.transform.scale(self.fecran, (largeur, hauteur))
         self.frame = pygame.display.set_mode((largeur, hauteur))        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
-        self.mon_groupe = pygame.sprite.Group()
+        self.groupe = pygame.sprite.Group()
         self.souris = Souris()
 
         self.plateau = Plateau()
-        paquet = Paquet(vide = True)
-        carte1 = Carte("pique", 1)
-        
-        self.plateau.ajouter_paquet(paquet)
-        self.plateau[0].cartes.append(carte1)
-    
+
     def loop(self):
         self.alive = True
+        
 
         while self.alive:
             self.frame.blit(self.fecran,(0,0))
+
+            self.vitesseCurseurX, self.vitesseCurseurY = pygame.mouse.get_rel()     # permet simplement de débugger cette fonction de l'enfer pour updatePlateau()
+                                                                                    # Ça serait peut etre mieux de trouver un moyen de le faire dans curseur.py
+
 
 
             pression = pygame.mouse.get_pressed(3)
@@ -45,12 +45,40 @@ class Interface:            # À compléter plus tard
                 if event.type == pygame.QUIT:
                     self.alive = False
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    for paq in self.plateau.paquets:
-                        for carte in paq:
-                            if pygame.Rect.colliderect(pygame.mouse.pos): #### Continuer
-                                carte.retourner()
 
-            self.mon_groupe.draw(self.frame)
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1 :
+                            for paq in self.plateau.paquets:
+                                for carte in paq:
+                                    if carte.rect.collidepoint(pygame.mouse.get_pos()): #### Continuer
+                                        self.plateau.carte_en_main = carte
+                    
+                if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                    self.plateau.carte_en_main = None
+
+
+                if event.type == pygame.KEYDOWN:                            # permet de finir quitter le jeu lorsque l'on press échappe
+                    if event.key == pygame.K_ESCAPE:
+                        self.alive = False
+            
+            self.updatePlateau()                                            # update le plateau (affiche les cartes, gère la carte en main, ect...)
             self.souris.update(self.frame)                                  # Affiche la Souris depuis souris.py
-            pygame.display.flip()
+            pygame.display.flip()                                           # refresh l'image à partir du nouvel état de self.groupe
+
+
+
+
+
+    def updatePlateau(self):
+        if self.plateau.carte_en_main != None:
+            
+            self.plateau.carte_en_main.deplacer(self.vitesseCurseurX, self.vitesseCurseurY)
+
+        for paquet in self.plateau.paquets:
+            for carte in paquet.cartes:
+
+                if carte not in self.groupe:
+                    self.groupe.add(carte)
+
+
+        self.groupe.draw(self.frame)

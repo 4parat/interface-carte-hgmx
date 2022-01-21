@@ -5,12 +5,14 @@ from exceptions import *
 class Plateau:
     def __init__(self):
         self.paquets = []
+        self.carte_en_main = None
 
     def __getitem__(self, i):
         return self.paquets[i]
     
     def creer_paquet(self, vide = False, joker = False):                                 # crée un paquet sur le plateau
         self.paquets.append(Paquet(vide, joker))
+
     
     def supprimer_paquet(self, paquet):                     # supprime un paquet du plateau
         for i in range(len(self.paquets)):
@@ -23,5 +25,3 @@ class Plateau:
     def ajouter_paquet(self, paquet):                       # ajoute un paquet déja existant sur le plateau
         self.paquets.append(paquet)
     
-
-

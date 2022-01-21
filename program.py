@@ -4,7 +4,11 @@ from interface import *
 from carte import *
 
 interface = Interface(1700, 900)
-
-carte1 = Carte("", 0)
-interface.mon_groupe.add(carte1)
+plateau = interface.plateau
+plateau.creer_paquet(vide = True)
+plateau.paquets[0].cartes.append(Carte("pique", 1))
+plateau.paquets[0].cartes.append(Carte("coeur", 1))
+plateau[0][1].teleporter(500, 500)
 interface.loop()
+
+
