@@ -9,7 +9,7 @@ class Interface:            # À compléter plus tard
         self.fecran = pygame.image.load("images/table.jpg")
         self.fecran = pygame.transform.scale(self.fecran, (largeur, hauteur))
         self.frame = pygame.display.set_mode((largeur, hauteur))        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
-        self.groupe = pygame.sprite.Group()
+        self.groupe = pygame.sprite.LayeredUpdates()
         self.souris = Souris()
 
         self.plateau = Plateau()
@@ -52,6 +52,7 @@ class Interface:            # À compléter plus tard
                                 for carte in paq:
                                     if carte.rect.collidepoint(pygame.mouse.get_pos()): #### Continuer
                                         self.plateau.carte_en_main = carte
+                                        self.groupe.move_to_front(carte)
                     
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     self.plateau.carte_en_main = None
@@ -64,7 +65,6 @@ class Interface:            # À compléter plus tard
             self.updatePlateau()                                            # update le plateau (affiche les cartes, gère la carte en main, ect...)
             self.souris.update(self.frame)                                  # Affiche la Souris depuis souris.py
             pygame.display.flip()                                           # refresh l'image à partir du nouvel état de self.groupe
-
 
 
 
