@@ -55,6 +55,7 @@ class Carte(pygame.sprite.Sprite):
             elif self.enseigne == "carreau":
                 addrFace += "diamonds"
             
+            addrFace += ".png"
         return addrFace
 
 

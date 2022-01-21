@@ -1,6 +1,7 @@
 import pygame
 pygame.init()
 from souris import *
+from plateau import *
 
 class Interface:            # À compléter plus tard
     def __init__(self, largeur = 800, hauteur = 450):
