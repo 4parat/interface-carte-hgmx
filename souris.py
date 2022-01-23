@@ -10,7 +10,7 @@ class Souris(pygame.sprite.Sprite):
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.rect = self.curseur.get_rect()                                     #Creation de la hitbox
         self.enfoncer = False                                                   #IMPORTANT : A utilisé afin de deplacer les cartes ex : if souris.enfoncer == True : deplacer la carte
-        #self.tourner = False                                                   #IMPORTANT : A utilisé afin de retourner une carte .
+        self.tourner = False                                                   #IMPORTANT : A utilisé afin de retourner une carte .
         self.demander = False                                                   #IMPORTANT : A utilisé afin d'afficher en grand la carte .
 
 
@@ -21,6 +21,7 @@ class Souris(pygame.sprite.Sprite):
             interface.blit(self.curseur, self.rect)                                 #Permet de coller le sprit de la souris sur l'interface a chaque tick
         else:
             interface.blit(self.curseur,(self.rect.x - 12,self.rect.y - 12))     #Le - 12 sert à repositionner le nv curseur
+
 
 
 
@@ -36,11 +37,11 @@ class Souris(pygame.sprite.Sprite):
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.demander = True
 
-    #def Click_D(self):
-        #self.curseur = pygame.image.load("images/......")
-        #self.curseur = pygame.transform.scale(self.curseur,(...,...))
-        #self.curseur = pygame.transform.rotate(self.curseur, ....)
-        #self.tourner = True
+    def Click_D(self):
+        self.curseur = pygame.image.load("images/Cotton_gloves_retourner.png")
+        self.curseur = pygame.transform.scale(self.curseur,(27,27))
+        self.curseur = pygame.transform.rotate(self.curseur, -90)
+        self.tourner = True
 
 
 
@@ -51,7 +52,7 @@ class Souris(pygame.sprite.Sprite):
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.enfoncer = False                                            #Permet de reinitialiser le curseur
         self.demander = False
-        #self.tourner = False
+        self.tourner = False
 
 
 
