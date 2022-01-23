@@ -7,7 +7,7 @@ class Carte(pygame.sprite.Sprite):
         
         self.enseigne = enseigne        # la couleur de la carte
         self.valeur = valeur            # la valeur de la carte (as = 1, valet = 11, dame=  12, roi = 13, et joker = 0)
-        self.retourner = False           # Vrai si la carte est face caché
+        self.retournee = False           # Vrai si la carte est face caché
 
         self.updateSprite()         
 
@@ -16,7 +16,7 @@ class Carte(pygame.sprite.Sprite):
 
 
     def updateSprite(self):                     # permet d'update le sprite
-        if self.retourner:
+        if self.retournee:
             self.image = pygame.image.load("images/cartes 2 (avec Jokers)/dos-bleu.png")
         else :
             self.image = pygame.image.load(self.calcAddrFace())
@@ -65,7 +65,7 @@ class Carte(pygame.sprite.Sprite):
         return self.valeur > 10
     
     def retourner(self):                # permet de retourner la carte (swap de True à False ou de False à True)
-        self.retourner = not self.retourner
+        self.retournee = not self.retournee
         self.updateSprite()
         
     

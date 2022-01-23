@@ -30,50 +30,39 @@ class Interface:            # À compléter plus tard
 
 
 
-            pression = pygame.mouse.get_pressed(3)
-            if pression[0] == True :
-                self.souris.click_G()
-            elif pression[2] == True :                                      #A faire : Gerer le click droit
-                self.souris.Click_D()
-            elif pression[1] == True :
-                self.souris.click_M()
-            else:
-                self.souris.reinitialiser()
-
-            if self.souris.enfoncer == True :                               #Reutilisation de la gestion d'evenement click souris sur souris.py
-                for paq in self.plateau.paquets:
-                    for carte in paq:
-                        if carte.rect.collidepoint((self.souris.rect.x, self.souris.rect.y)): #### Continuer
-                            self.plateau.carte_en_main = carte
-                            self.groupe.move_to_front(carte)
-
-
-
-
-            for event in pygame.event.get() :                                   # Boucle qui teste les évènements
+            for event in pygame.event.get() :                            ############ BOUCLE DES ÉVÈNEMENTS
                 
-                if event.type == pygame.QUIT:
+                if event.type == pygame.QUIT:                   # Gestion de la fermeture du programme
                     self.alive = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.bouton_quitter.rect.collidepoint((self.souris.rect.x, self.souris.rect.y)):
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.bouton_quitter.rect.collidepoint((self.souris.rect.x, self.souris.rect.y)):
                        self.alive = False
+                
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Lorsque clic gauche enfoncé
+                    self.souris.click_G()                                           # Load le sprite du clic gauche
+                    for paquets in self.plateau.paquets:                            # Ajoute la carte touché par le clic en main
+                        for carte in paquets:
+                            if carte.rect.collidepoint(pygame.mouse.get_pos()):
+                                self.plateau.carte_en_main = carte
+                                self.groupe.move_to_front(carte)
 
-
-
-
-                if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                if event.type == pygame.MOUSEBUTTONUP and event.button == 1:    # Lorsque clic gauche désenfoncé
+                    self.souris.reinitialiser()                                     # Reset le sprite de la souris
                     self.plateau.carte_en_main = None
+                
 
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
+                    if self.plateau.carte_en_main != None:
+                        self.plateau.carte_en_main.retourner()
+                    else:
+                        for paquets in self.plateau.paquets:
+                            for carte in paquets:
+                                if carte.rect.collidepoint(pygame.mouse.get_pos()):
+                                    carte.retourner()
 
-                if event.type == pygame.KEYDOWN:                            # permet de finir quitter le jeu lorsque l'on press échappe
-                    if event.key == pygame.K_ESCAPE:
-                        self.alive = False
             
             self.updatePlateau()                                            # update le plateau (affiche les cartes, gère la carte en main, ect...)
             self.souris.update(self.frame)                                  # Affiche la Souris depuis souris.py
             pygame.display.flip()                                           # refresh l'image à partir du nouvel état de self.groupe
-
-
 
 
     def updatePlateau(self):
@@ -83,7 +72,6 @@ class Interface:            # À compléter plus tard
 
         for paquet in self.plateau.paquets:
             for carte in paquet.cartes:
-
                 if carte not in self.groupe:
                     self.groupe.add(carte)
 
