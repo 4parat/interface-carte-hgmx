@@ -32,7 +32,7 @@ class Souris(pygame.sprite.Sprite):
         self.curseur = pygame.transform.rotate(self.curseur, -90)
         self.demander = True
 
-    def Click_D(self):
+    def click_D(self):
         self.curseur = pygame.image.load("images/Cotton_gloves_retourner.png")
         self.curseur = pygame.transform.scale(self.curseur,(27,27))
         self.curseur = pygame.transform.rotate(self.curseur, -90)
