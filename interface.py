@@ -10,7 +10,6 @@ class Interface:            # À compléter plus tard
         self.fecran = pygame.image.load("images/plateau.jpeg")
         self.fecran = pygame.transform.scale(self.fecran, (largeur, hauteur))
         self.frame = pygame.display.set_mode((largeur, hauteur),pygame.FULLSCREEN)        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
-        self.groupe = pygame.sprite.LayeredUpdates()
         self.souris = Souris()
         self.bouton_quitter = pygame.image.load("images/Boutton_quitter.png")
         self.bouton_quitter = Bouton(largeur - 60,0,self.bouton_quitter)
@@ -37,13 +36,18 @@ class Interface:            # À compléter plus tard
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.bouton_quitter.rect.collidepoint((self.souris.rect.x, self.souris.rect.y)):
                        self.alive = False
                 
+                #if event.type == pygame.KEYDOWN and event.key == KEYESCAPE:
+                #    if menu:
+                #        menu = False
+                
+
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Lorsque clic gauche enfoncé
                     self.souris.click_G()                                           # Load le sprite du clic gauche
-                    for paquets in self.plateau.paquets:                            # Ajoute la carte touché par le clic en main
-                        for carte in paquets:
+                    for paquet in self.plateau.paquets:                            # Ajoute la carte touché par le clic en main
+                        for carte in paquet:
                             if carte.rect.collidepoint(pygame.mouse.get_pos()):
                                 self.plateau.carte_en_main = carte
-                                self.groupe.move_to_front(carte)
+                                paquet.move_to_front(carte)
 
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1:    # Lorsque clic gauche désenfoncé
                     self.souris.reinitialiser()                                     # Reset le sprite de la souris
@@ -69,12 +73,7 @@ class Interface:            # À compléter plus tard
         if self.plateau.carte_en_main != None:
             
             self.plateau.carte_en_main.deplacer(self.vitesseCurseurX, self.vitesseCurseurY)
-
+            
         for paquet in self.plateau.paquets:
-            for carte in paquet.cartes:
-                if carte not in self.groupe:
-                    self.groupe.add(carte)
-
-
-        self.groupe.draw(self.frame)
+            paquet.draw(self.frame)
         self.bouton_quitter.update(self.frame)

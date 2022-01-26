@@ -9,9 +9,8 @@ y = fullscreen.current_h                             #Aller voir https://www.pyg
 interface = Interface(x, y)
 plateau = interface.plateau
 plateau.creer_paquet(vide = True)
-plateau.paquets[0].cartes.append(Carte("pique", 1))
-plateau.paquets[0].cartes.append(Carte("coeur", 1))
-plateau[0][1].teleporter(500, 500)
+plateau[0].add(Carte("coeur", 1))
+plateau[0].add(Carte("pique", 1))
 interface.loop()
 
 
