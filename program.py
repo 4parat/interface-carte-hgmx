@@ -2,6 +2,7 @@ from plateau import *
 from paquet import *
 from interface import *
 from carte import *
+from musique import *
 
 fullscreen = pygame.display.Info()
 x = fullscreen.current_w                             #renvoi les dimensions actuelle de votre ecran qu'importe la taille
