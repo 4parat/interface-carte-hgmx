@@ -5,7 +5,7 @@ from exceptions import *
 class Plateau:
     def __init__(self):
         self.paquets = []
-        self.carte_en_main = None
+        self.carte_en_main = Paquet(vide = True)
 
     def __getitem__(self, i):
         return self.paquets[i]

@@ -43,22 +43,26 @@ class Interface:            # À compléter plus tard
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Lorsque clic gauche enfoncé
                     self.souris.click_G()                                           # Load le sprite du clic gauche
-                    for paquet in self.plateau.paquets:                            # Ajoute la carte touché par le clic en main
-                        for carte in paquet:
-                            if carte.rect.collidepoint(pygame.mouse.get_pos()):
-                                self.plateau.carte_en_main = carte
-                                paquet.move_to_front(carte)
+                    for paquet in self.plateau.paquets:                             # Ajoute la carte touché par le clic en main
+                        if paquet[-1].rect.collidepoint(pygame.mouse.get_pos()):     
+                            self.plateau.carte_en_main.add(paquet[-1])
+                                
 
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1:    # Lorsque clic gauche désenfoncé
                     self.souris.reinitialiser()                                     # Reset le sprite de la souris
-                    self.plateau.carte_en_main = None
+                    
+                    for paquet in self.plateau.paquets:
+                        if self.plateau.carte_en_main[0].rect.colliderect(paquet[-2]):
+                            pass
+                    self.plateau.carte_en_main.empty()                               # Enlève la carte de la main
                 
 
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
-                    if self.plateau.carte_en_main != None:
-                        self.plateau.carte_en_main.retourner()
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:  # Lorsque clic droit enfoncé
+                    if self.plateau.carte_en_main.sprites != []:                          # si main non vide
+                        self.plateau.carte_en_main.retourner()                          # retourne la carte dans la main
                     else:
-                        for paquets in self.plateau.paquets:
+                        for paquets in self.plateau.paquets:                        # sinon test si carte en dessous de la souris
+                                                                                    # puis la retourne
                             for carte in paquets:
                                 if carte.rect.collidepoint(pygame.mouse.get_pos()):
                                     carte.retourner()
@@ -69,11 +73,13 @@ class Interface:            # À compléter plus tard
             pygame.display.flip()                                           # refresh l'image à partir du nouvel état de self.groupe
 
 
+            
     def updatePlateau(self):
-        if self.plateau.carte_en_main != None:
-            
-            self.plateau.carte_en_main.deplacer(self.vitesseCurseurX, self.vitesseCurseurY)
-            
         for paquet in self.plateau.paquets:
             paquet.draw(self.frame)
+
+        if self.plateau.carte_en_main.sprites() != [] :
+            self.plateau.carte_en_main[0].deplacer(self.vitesseCurseurX, self.vitesseCurseurY)
+            self.plateau.carte_en_main.draw(self.frame)
+
         self.bouton_quitter.update(self.frame)
