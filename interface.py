@@ -1,8 +1,9 @@
 import pygame
-pygame.init()
 from souris import *
 from plateau import *
 from Bouton import *
+
+pygame.init()
 
 class Interface:            # À compléter plus tard
     def __init__(self, largeur = 800, hauteur = 450):
@@ -12,6 +13,7 @@ class Interface:            # À compléter plus tard
         self.frame = pygame.display.set_mode((largeur, hauteur))        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
         self.souris = Souris()
         self.bouton_quitter = pygame.image.load("images/Boutton_quitter.png")
+        self.bouton_quitter = pygame.transform.scale(self.bouton_quitter, (60, 60))
         self.bouton_quitter = Bouton(largeur - 60,0,self.bouton_quitter)
         self.hauteur = hauteur
         self.largeur = largeur
