@@ -31,6 +31,12 @@ class Interface:            # À compléter plus tard
 
             for event in pygame.event.get() :                            ############ BOUCLE DES ÉVÈNEMENTS
                 
+
+                if event.type == pygame.USEREVENT:                                 
+                    if len ( playlist ) > 0:                               # evenement de la musique
+                        pygame.mixer.music.queue ( playlist.pop() )                 
+
+                
                 if event.type == pygame.QUIT:                   # Gestion de la fermeture du programme
                     self.alive = False
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.bouton_quitter.rect.collidepoint((self.souris.rect.x, self.souris.rect.y)):
