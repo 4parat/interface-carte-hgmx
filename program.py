@@ -11,6 +11,7 @@ interface = Interface(x, y)
 plateau = interface.plateau
 plateau.creer_paquet()
 plateau[0].melanger()
+plateau[0].retourner()
 interface.loop()
 
 

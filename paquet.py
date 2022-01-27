@@ -15,7 +15,7 @@ class Paquet(pygame.sprite.LayeredUpdates):
                     self.add(Carte(i, j+1))
         if joker:
             for i in range(2):
-                self.add(Carte(None, 0))      # J'avoue ne pas avoir trouver de sprite pour les jokers
+                self.add(Carte(None, 0))
 
     def __repr__(self):             # permet d'afficher l'ensemble des cartes du paquet dans la console en faisant print(paquet)
         repr = ""
@@ -43,7 +43,7 @@ class Paquet(pygame.sprite.LayeredUpdates):
         return self.sprites().__len__()
 
     def inverser(self):                         # Permet de changer l'ORDRE des cartes (la première devient la dernière et vice versa sans changer en gardant le fait)
-        self.sprites = self.sprites()[::-1]         # que les cartes soient retourné ou non
+        self._sprites = self.sprites()[::-1]         # que les cartes soient retourné ou non
 
     def retourner(self):                        # Permet de retourner le paquet comme dans la réalité : la première devient la dernière et toute les cartes sont
         self.retourné = not self.retourné       # retournés.
