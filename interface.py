@@ -46,14 +46,29 @@ class Interface:            # À compléter plus tard
                     for paquet in self.plateau.paquets:                             # Ajoute la carte touché par le clic en main
                         if paquet[-1].rect.collidepoint(pygame.mouse.get_pos()):     
                             self.plateau.carte_en_main.add(paquet[-1])
+                            paquet.remove(paquet[-1])
+                            print("Transfert paquet vers main")
+                        if paquet.sprites() == []:
+                            print("Suppression du paquet")
+                            self.plateau.paquets.remove(paquet)
+                    
                                 
 
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1:    # Lorsque clic gauche désenfoncé
                     self.souris.reinitialiser()                                     # Reset le sprite de la souris
                     
+                    carte_dans_paquet = False
                     for paquet in self.plateau.paquets:
-                        if self.plateau.carte_en_main[0].rect.colliderect(paquet[-2]):
-                            pass
+                        if self.plateau.carte_en_main[0].rect.colliderect(paquet[-1]):  #!! Erreur sur paquet[-1]
+                            paquet.add(self.plateau.carte_en_main[0])
+                            print("Transfert main vers paquet")
+                            carte_dans_paquet = True
+                    
+                    if not carte_dans_paquet:
+                        paq = Paquet(vide = True)
+                        self.plateau.paquets.append(paq)
+                        paq.add(self.plateau.carte_en_main[0])
+                        print("Création du paquet")
                     self.plateau.carte_en_main.empty()                               # Enlève la carte de la main
                 
 
