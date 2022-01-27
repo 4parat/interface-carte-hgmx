@@ -15,10 +15,3 @@ pygame.mixer.music.load ( playlist.pop() )  # va lire la première musique de la
 pygame.mixer.music.queue ( playlist.pop() ) # la deuxième musique de la playlist
 pygame.mixer.music.set_endevent ( pygame.USEREVENT )    # Setup the end track event
 pygame.mixer.music.play()           # lire la musique automatiquement 
-
-running = True
-while running:
-   for event in pygame.event.get():
-      if event.type == pygame.USEREVENT:    # une musique est terminer
-         if len ( playlist ) > 0:       # ells va continuer à lire les autres musique
-            pygame.mixer.music.queue ( playlist.pop() ) 
