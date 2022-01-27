@@ -9,7 +9,7 @@ class Interface:            # À compléter plus tard
         pygame.display.set_caption("Card Game")
         self.fecran = pygame.image.load("images/plateau.jpeg")
         self.fecran = pygame.transform.scale(self.fecran, (largeur, hauteur))
-        self.frame = pygame.display.set_mode((largeur, hauteur),pygame.FULLSCREEN)        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
+        self.frame = pygame.display.set_mode((largeur, hauteur))        # Rajouter pygame.FULLSCREEN pour mettre en plein ecran
         self.souris = Souris()
         self.bouton_quitter = pygame.image.load("images/Boutton_quitter.png")
         self.bouton_quitter = Bouton(largeur - 60,0,self.bouton_quitter)
@@ -60,9 +60,13 @@ class Interface:            # À compléter plus tard
                     carte_dans_paquet = False
                     for paquet in self.plateau.paquets:
                         if self.plateau.carte_en_main[0].rect.colliderect(paquet[-1]):  #!! Erreur sur paquet[-1]
+                            self.plateau.carte_en_main[0].rect.centerx = paquet[-1].rect.centerx
+                            self.plateau.carte_en_main[0].rect.centery = paquet[-1].rect.centery
                             paquet.add(self.plateau.carte_en_main[0])
+
                             print("Transfert main vers paquet")
                             carte_dans_paquet = True
+                            break
                     
                     if not carte_dans_paquet:
                         paq = Paquet(vide = True)
@@ -93,7 +97,7 @@ class Interface:            # À compléter plus tard
         for paquet in self.plateau.paquets:
             paquet.draw(self.frame)
 
-        if self.plateau.carte_en_main.sprites() != [] :
+        if len(self.plateau.carte_en_main.sprites()) != 0:
             self.plateau.carte_en_main[0].deplacer(self.vitesseCurseurX, self.vitesseCurseurY)
             self.plateau.carte_en_main.draw(self.frame)
 

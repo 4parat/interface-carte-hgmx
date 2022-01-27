@@ -52,7 +52,11 @@ class Paquet(pygame.sprite.LayeredUpdates):
         self.inverser()
 
     def melanger(self):             # Permet de mélanger les cartes
-        shuffle(self)
+        melange = self.sprites()
+        self.empty()
+        shuffle(melange)
+        for i in melange:
+            self.add(i)
     
     # def donner(self, paquet, nb):   # Permet de transférer nb cartes du paquet "self" vers un paquet "paquet"
     #     for i in range(nb):

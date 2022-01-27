@@ -9,7 +9,7 @@ class Carte(pygame.sprite.Sprite):
         self.valeur = valeur            # la valeur de la carte (as = 1, valet = 11, dame=  12, roi = 13, et joker = 0)
         self.retournee = False           # Vrai si la carte est face caché
 
-        self.updateSprite()         
+        self.updateSprite()
 
         self.rect = self.image.get_rect()
        #self.image est crée dans updateSprite()

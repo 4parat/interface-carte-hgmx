@@ -9,9 +9,8 @@ x = fullscreen.current_w                             #renvoi les dimensions actu
 y = fullscreen.current_h                             #Aller voir https://www.pygame.org/docs/ref/display.html#pygame.display.Info pour comprendre
 interface = Interface(x, y)
 plateau = interface.plateau
-plateau.creer_paquet(vide = True)
-plateau[0].add(Carte("coeur", 1))
-plateau[0].add(Carte("pique", 1))
+plateau.creer_paquet()
+plateau[0].melanger()
 interface.loop()
 
 
